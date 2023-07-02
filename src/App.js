@@ -8,7 +8,7 @@ function App() {
 
   const [socket, setSocket] = useState(null)
   useEffect(() => {
-    setSocket(io.connect("http://4-point-game-backend.railway.internal:3001"))
+    setSocket(io.connect("http://4-point-game-backend.railway.internal",{ transports : ['websocket'] }))
   }, [])
 
   // client state
@@ -42,7 +42,6 @@ function App() {
 
   const returnPoint = (column, row, player) => {
     if (column >= 1 && column <= 12 && row >= 1 && row <= 8) {
-      console.log(row, column)
       if (table.filter((box) => (box.symbol === player && box.column === column && box.row === row)).length !== 0) {
         return 1
       } else {
@@ -56,7 +55,6 @@ function App() {
 
   useEffect(() => {
     if (activeBox !== undefined) {
-      console.log('activeBox', activeBox)
       var symbol = table.filter((box) => (box.column === activeBox.column && box.row === activeBox.row))[0]?.symbol
       var x_score = -1
       for (var i = activeBox.column; i <= 12; i++) {
@@ -117,7 +115,6 @@ function App() {
   useEffect(() => {
     if (socket !== null) {
       socket.on("returnRoomState", (data) => {
-        console.log('returnRoomState', data)
 
         setPlayer([data[0].player1, data[0].player2])
         setGameStatus(data[0].gameStatus)
