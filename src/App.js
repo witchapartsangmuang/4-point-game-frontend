@@ -8,7 +8,7 @@ function App() {
 
   const [socket, setSocket] = useState(null)
   useEffect(() => {
-    setSocket(io.connect("http://localhost:3001"))
+    setSocket(io.connect("http://4-point-game-backend.railway.internal:3001"))
   }, [])
 
   // client state
