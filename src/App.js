@@ -8,7 +8,7 @@ function App() {
 
   const [socket, setSocket] = useState(null)
   useEffect(() => {
-    setSocket(io.connect("http://4-point-game-backend.railway.internal",{ transports : ['websocket'] }))
+    setSocket(io.connect("http://4-point-game-backend.up.railway.app",{ transports : ['websocket'] }))
   }, [])
 
   // client state
